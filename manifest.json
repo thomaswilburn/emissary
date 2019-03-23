@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Emissary",
+  "version": "0.0.1",
+  "description": "Guardian of the wormhole (CORS proxy)",
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [{
+    "matches": ["*://*/*"],
+    "js": ["emissaryInjection.js"]
+  }],
+
+  "permissions": [
+    "*://*/*",
+    "storage"
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "emissary@thomaswilburn.net"
+    }
+  },
+
+  "web_accessible_resources": [
+    "emissaryRequest.js"
+  ],
+
+  "page_action": {
+    "default_icon": "security.svg",
+    "default_title": "Emissary approval",
+    "default_popup": "approval.html"
+  }
+}

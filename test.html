@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Emissary</title>
+<script>
+  setTimeout(async function() {
+    var waypoint = await runabout("http://rss.acast.com/vicegamingsnewpodcast");
+    console.log(waypoint.slice(0, 100));
+    try {
+      html = await runabout("https://milezero.org");
+      console.log(html.slice(0, 100));
+    } catch (err) {
+      console.log(err);
+    }
+  }, 1000);
+</script>
