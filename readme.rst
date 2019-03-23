@@ -13,11 +13,11 @@ The first time that you try to make a `runabout` request, it will be refused. Us
 Sample code
 ===========
 
-    try {
-      var response = await window.runabout("https://google.com");
-      console.log("Successful cross-origin fetch!", response);
-    } catch (err) {
-      if (err.message == "Unauthorized origin") {
-        alert("Please click the shield icon to authorize this origin");
-      }
+  try {
+    var response = await window.runabout("https://google.com");
+    console.log("Successful cross-origin fetch!", response);
+  } catch (err) {
+    if (err.message == "Unauthorized origin") {
+      alert("Please click the shield icon to authorize this origin");
     }
+  }
