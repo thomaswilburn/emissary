@@ -1,3 +1,5 @@
+var browser = browser || chrome;
+
 var domain = document.querySelector(".domain");
 var input = document.querySelector(".approval");
 

@@ -1,5 +1,12 @@
 var browser = browser || chrome;
 
+var getStorage = function(keys) {
+  return new Promise(function(ok) {
+    var result = browser.storage.local.get(keys, ok);
+    if (result) ok(result);
+  });
+};
+
 var updatePageAction = function(id, domain, approved) {
   browser.pageAction.setPopup({
     tabId: id,
@@ -8,7 +15,7 @@ var updatePageAction = function(id, domain, approved) {
 }
 
 browser.runtime.onMessage.addListener(async function(data, sender) {
-  var { whitelist = [] } = await browser.storage.local.get("whitelist");
+  var { whitelist = [] } = await getStorage("whitelist");
 
   switch (data.type) {
     case "approve":
@@ -35,7 +42,7 @@ browser.runtime.onConnect.addListener(function(wormhole) {
 
     var { sender } = wormhole;
     var { origin } = new URL(wormhole.sender.url);
-    var { whitelist = [] } = await browser.storage.local.get("whitelist");
+    var { whitelist = [] } = await getStorage("whitelist");
     var whitelisted = whitelist.some(w => w == origin);
 
     updatePageAction(sender.tab.id, origin, whitelisted);
